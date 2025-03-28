@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Summary of Your Decisions</h1>
+
+    <h2>Yes Decisions:</h2>
+    <ul>
+        {% for product in decided_category_yes %}
+            <li>{{ product }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>No Decisions:</h2>
+    <ul>
+        {% for product in decided_category_no %}
+            <li>{{ product }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Maybe Decisions:</h2>
+    <ul>
+        {% for product in decided_category_maybe %}
+            <li>{{ product }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Undecided Products:</h2>
+    <ul>
+        {% for product in undecided %}
+            <li>{{ product }}</li>
+        {% endfor %}
+    </ul>
+
+    <br><br>
+    <a href="{{ url_for('index') }}">
+        <button>Back to Home</button>
+    </a>
+</body>
+</html>
+

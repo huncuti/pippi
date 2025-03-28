@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Review - Review Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap">
+    <style>
+        body {
+            font-family: 'Fira Code', monospace;
+            background: url('/static/pippi1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 10px;
+        }
+
+        h1, p, label {
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        select, button {
+            font-family: 'Fira Code', monospace;
+            font-size: 16px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .navigation {
+            margin-top: 20px;
+        }
+
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation container -->
+        <div class="navigation">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('summary') }}">Summary</a>
+        </div>
+
+        <!-- Main content -->
+        <h1>Product Review - {{ product['Device name'] }}</h1>
+        <p>Product Group: {{ product['Product group'] }}</p>
+        <p>Reason for Recall: {{ product['Reason for recall'] }}</p>
+
+        <!-- Form for decision -->
+        <form method="POST" action="{{ url_for('review', product_index=current_product_index) }}">
+            <label for="decision">Decision:</label>
+            <select name="decision" id="decision">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="maybe">Maybe</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Navigation buttons -->
+        <div class="navigation">
+            {% if current_product_index > 0 %}
+                <a href="{{ url_for('change_decision', direction='previous') }}">Previous</a>
+            {% endif %}
+            {% if current_product_index < (df | length) - 1 %}
+                <a href="{{ url_for('change_decision', direction='next') }}">Next</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+

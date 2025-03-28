@@ -1,0 +1,224 @@
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Fira Code', monospace;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+  
+}
+}
+
+/* Background for review.html */
+body.review-page {
+    background: url('/static/pippi1.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Navigation Bar for review.html (Home and Library buttons) */
+.nav-bar {
+    position: absolute;
+    top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.nav-button {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+/* Unified Container for review.html */
+.review-page .container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: white;
+}
+
+/* Product Details and Review Options Styling - REMOVED WHITE BACKGROUND */
+#product-details {
+    padding: 20px;
+    margin: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: left;
+}
+
+#review-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Styling for the "Show More" button - BLACK BACKGROUND */
+.button {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button:hover {
+    background-color: #333; /* Darker black on hover */
+}
+
+/* Styling for the navigation links */
+.nav-link {
+    background-color: black; /* Black boxes */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    background-color: #333; /* Darker black on hover */
+}
+
+/* Styling for the radio buttons and labels - INLINE LAYOUT */
+.radio-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radio-group label {
+    margin-right: 10px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Submit Button Styling */
+.submit-button {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+/* Expandable Text */
+.expandable-text {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.text-content {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    max-height: 100px; /* Adjust as needed */
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.text-content.expanded {
+    max-height: 500px; /* Adjust as needed */
+}
+
+/* Navigation Links Container */
+#nav-links {
+    margin-top: 30px; /* Bigger space between submit row and nav links */
+    display: flex;
+    justify-content: center; /* Center nav links */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .library-content {
+        flex-direction: column;
+    }
+
+    .category-column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .category-column h2 {
+        font-size: 1.2rem;
+    }
+
+    .product-list li {
+        font-size: 0.9rem;
+    }
+
+    .nav-button {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .button, .nav-link, .submit-button {
+        padding: 8px 16px;
+    }
+}
+/* Styling for Library.html */
+
+.container-wrapper {
+    width: 80%;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: white;
+    margin: 20px auto;
+}
+
+.category-column {
+    width: 30%;
+    text-align: left;
+}
+
+.product-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.product-list li {
+    margin-bottom: 5px;
+}

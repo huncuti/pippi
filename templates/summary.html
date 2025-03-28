@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap">
+    <style>
+        /* Set body font-family and background */
+        body {
+            font-family: 'Fira Code', monospace;
+            background: url('/static/pippi2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff; /* Set text color to white for better visibility */
+            margin: 0; /* Remove default margin to make background cover the entire viewport */
+            padding: 0; /* Remove default padding */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column; /* Align items vertically */
+        }
+
+        /* Style your content here */
+        a {
+            color: #fff; /* Set link color to white */
+            text-decoration: none; /* Remove underline from links */
+            font-size: 18px;
+            margin: 10px; /* Add margin for spacing */
+        }
+
+        h1, p, .links {
+            color: #fff; /* Set text color to white */
+            margin: 10px 0; /* Add margin for spacing */
+        }
+
+        .links {
+            margin-top: 20px; /* Add margin for spacing */
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center items vertically */
+        }
+
+        .links a {
+            font-size: 16px;
+            margin: 0 10px; /* Adjust margin between links */
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('index') }}">Home</a> <!-- Move this line to the top -->
+
+    <h1>Summary</h1>
+
+    <!-- Display the counts for each category -->
+    <p>Decided Yes: {{ decided_category_yes | length }}</p>
+    <p>Decided No: {{ decided_category_no | length }}</p>
+    <p>Decided Maybe: {{ decided_category_maybe | length }}</p>
+    <p>Undecided: {{ undecided | length }}</p>
+
+    <!-- Add text links for Library and Export -->
+    <div class="links">
+        <a href="{{ url_for('library') }}">Library</a>
+        <a href="{{ url_for('download_data') }}">Export</a>
+    </div>
+</body>
+</html>

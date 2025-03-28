@@ -1,0 +1,52 @@
+<body class="review-page">
+    <div id="content-container">
+        <h1>Product Review</h1>
+
+        <!-- Display Flash Message -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-message">
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Product Review Content -->
+        <div id="product-details">
+            <h2>Product Details</h2>
+            <p><strong>Base:</strong> {{ product['Base'] }}</p>
+            <p><strong>Device Name:</strong> {{ product['Device name'] }}</p>
+            <p><strong>Product Group:</strong> {{ product['Product group'] }}</p>
+            <p><strong>Reason for Recall:</strong> {{ product['Reason for recall'] }}</p>
+        </div>
+
+        <!-- Review Form -->
+        <div id="review-options">
+            <h2>Review Options</h2>
+            <form action="/review" method="post">
+                <!-- Radio buttons for review decisions -->
+                <label for="reviewYes" class="radio-button">Yes</label>
+                <input type="radio" name="review" id="reviewYes" value="yes" required>
+
+                <label for="reviewMaybe" class="radio-button">Maybe</label>
+                <input type="radio" name="review" id="reviewMaybe" value="maybe" required>
+
+                <label for="reviewNo" class="radio-button">No</label>
+                <input type="radio" name="review" id="reviewNo" value="no" required>
+
+                <button type="submit" class="submit-button">Submit Review</button>
+            </form>
+        </div>
+
+        <!-- Navigation Links -->
+        <div id="nav-links">
+            <a href="/change_decision/previous" class="nav-link">Previous Product</a>
+            <a href="/change_decision/next" class="nav-link">Next Product</a>
+        </div>
+    </div>
+</body>
+

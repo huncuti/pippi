@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Review</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body.review-page {
+            background: url('{{ url_for('static', filename='pippi1.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+        body {
+            cursor: url('{{ url_for('static', filename='p.png') }}'), auto;
+        }
+    </style>
+</head>
+<body class="review-page">
+    <div class="nav-bar">
+        <a href="/" class="nav-button">Home</a>
+        <a href="/library" class="nav-button">Library</a>
+    </div>
+    <div class="container-wrapper">
+        <div id="product-details">
+            <h2>Product Details</h2>
+            <p><strong>Device Name:</strong> {{ product['Device name'] }}</p>
+            <p><strong>Product Group:</strong> {{ product['Product group'] }}</p>
+            <div class="expandable-text">
+                <p><strong>Reason for recall:</strong></p>
+                <div class="text-content">
+                    {{ product['Reason for recall'] }}
+                </div>
+                <button onclick="toggleText(this)" id="showMoreButton" class="button">Show More</button>
+            </div>
+            <p><strong>Base:</strong> {{ product['Base'] }}</p>
+            <form id="review-options" method="POST" action="/review">
+                <input type="hidden" name="product_id" value="">
+                <div class="radio-group">
+                    <label><input type="radio" name="decision" value="yes" required> Yes</label>
+                    <label><input type="radio" name="decision" value="no" required> No</label>
+                    <label><input type="radio" name="decision" value="maybe" required> Maybe</label>
+                </div>
+                <button type="submit" class="submit-button">Submit Review</button>
+            </form>
+        </div>
+        <div id="nav-links">
+            <a href="/change_decision/previous" class="nav-link">Previous</a>
+            <a href="/change_decision/next" class="nav-link">Next</a>
+        </div>
+    </div>
+    <script>
+        function toggleText(button) {
+            var textContent = document.querySelector(".text-content");
+            if (textContent.classList.contains("expanded")) {
+                textContent.classList.remove("expanded");
+                button.innerText = "Show More";
+            } else {
+                textContent.classList.add("expanded");
+                button.innerText = "Show Less";
+            }
+        }
+    </script>
+</body>
+</html>
