@@ -4,15 +4,11 @@ body {
     padding: 0;
     font-family: 'Fira Code', monospace;
     color: #fff;
-    height: 100vh;
-    display: flex;
+    display: flex; /* Use flexbox for centering */
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Use min-height to allow content to expand */
     background-color: #f4f4f4;
-  
-}
 }
 
 /* Background for review.html */
@@ -21,48 +17,71 @@ body.review-page {
     background-size: cover;
 }
 
-/* Navigation Bar for review.html (Home and Library buttons) */
+/* Background for library.html */
+body.library-page {
+    background: url('{{ url_for('static', filename='library.webp') }}') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Navigation Bar (Home and Library buttons) for review.html */
 .nav-bar {
-    position: absolute;
+    position: fixed;
     top: 10px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    width: 100%;
     padding: 0 20px;
+    z-index: 10;
 }
 
-.nav-button {
-    background-color: rgba(0, 0, 0, 0.8);
+.nav-bar a {
+    background-color: black;
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
+    padding: 10px 15px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    border-radius: 5px;
 }
 
-.nav-button:hover {
-    background-color: rgba(0, 0, 0, 1);
+/* Download Data Button (Bottom Right) for library.html */
+.download-button-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
 }
 
-/* Unified Container for review.html */
-.review-page .container-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.download-button-container a {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Unified Container for review.html and library.html */
+.container-wrapper {
     width: 80%;
     max-width: 800px;
     background: rgba(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
     color: white;
+    margin: 20px auto; /* Default margin for review.html and library.html */
+    display: flex;
+    flex-direction: column; /* Ensure content is in a column */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text within the container */
 }
 
-/* Product Details and Review Options Styling - REMOVED WHITE BACKGROUND */
+/* Special styling for index.html container */
+body:not(.review-page):not(.library-page) .container-wrapper {
+    margin: auto; /* Centering for index.html */
+    position: static; /* Use static positioning */
+    transform: none; /* remove transform */
+}
+
+/* Product Details and Review Options Styling */
 #product-details {
     padding: 20px;
     margin: 10px;
@@ -78,8 +97,8 @@ body.review-page {
     margin-top: 10px;
 }
 
-/* Styling for the "Show More" button - BLACK BACKGROUND */
-.button {
+/* Styling for the "Show More" button, nav-links and submit button */
+.button, .nav-link, .submit-button {
     background-color: black;
     color: white;
     padding: 10px 15px;
@@ -87,58 +106,15 @@ body.review-page {
     border-radius: 5px;
     cursor: pointer;
     margin: 5px;
-}
-
-.button:hover {
-    background-color: #333; /* Darker black on hover */
-}
-
-/* Styling for the navigation links */
-.nav-link {
-    background-color: black; /* Black boxes */
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 5px;
     text-decoration: none;
+    font-family: 'Fira Code', monospace; /* Consistent font for buttons */
 }
 
-.nav-link:hover {
-    background-color: #333; /* Darker black on hover */
+.button:hover, .nav-link:hover, .submit-button:hover {
+    background-color: #333;
 }
 
-/* Styling for the radio buttons and labels - INLINE LAYOUT */
-.radio-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.radio-group label {
-    margin-right: 10px;
-}
-
-.radio-group input[type="radio"] {
-    margin-right: 5px;
-}
-
-/* Submit Button Styling */
-.submit-button {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-left: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-    background-color: rgba(0, 0, 0, 1);
 }
 
 /* Expandable Text */
@@ -151,20 +127,36 @@ body.review-page {
     margin-top: 10px;
     font-size: 16px;
     line-height: 1.5;
-    max-height: 100px; /* Adjust as needed */
+    max-height: 100px;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
 }
 
 .text-content.expanded {
-    max-height: 500px; /* Adjust as needed */
+    max-height: 500px;
 }
 
 /* Navigation Links Container */
 #nav-links {
-    margin-top: 30px; /* Bigger space between submit row and nav links */
+    margin-top: 30px;
     display: flex;
-    justify-content: center; /* Center nav links */
+    justify-content: center;
+}
+
+/* Category Columns for library.html */
+.category-column {
+    width: 30%;
+    padding: 20px;
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+    word-wrap: break-word;
 }
 
 /* Mobile Responsiveness */
@@ -194,31 +186,4 @@ body.review-page {
     .button, .nav-link, .submit-button {
         padding: 8px 16px;
     }
-}
-/* Styling for Library.html */
-
-.container-wrapper {
-    width: 80%;
-    max-width: 800px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    color: white;
-    margin: 20px auto;
-}
-
-.category-column {
-    width: 30%;
-    text-align: left;
-}
-
-.product-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.product-list li {
-    margin-bottom: 5px;
 }

@@ -13,6 +13,26 @@
         body {
             cursor: url('{{ url_for('static', filename='p.png') }}'), auto;
         }
+        .expandable-product-group {
+            max-height: 50px; /* Adjust as needed */
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .expandable-product-group.expanded {
+            max-height: 500px; /* Adjust as needed */
+        }
+        .show-more-button {
+            margin-top: 10px; /* Add margin to push the button down */
+            background-color: black; /* Black background */
+            color: white; /* White text */
+            padding: 10px 15px; /* Padding, adjust as needed */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+        .show-more-button:hover {
+            background-color: #333; /* Darker black on hover */
+        }
     </style>
 </head>
 <body class="review-page">
@@ -24,17 +44,19 @@
         <div id="product-details">
             <h2>Product Details</h2>
             <p><strong>Device Name:</strong> {{ product['Device name'] }}</p>
-            <p><strong>Product Group:</strong> {{ product['Product group'] }}</p>
+            <div class="expandable-product-group">
+                <p><strong>Product Group:</strong> {{ product['Product group'] }}</p>
+            </div>
+            <button onclick="toggleProductGroup(this)" class="show-more-button">Show More</button>
             <div class="expandable-text">
                 <p><strong>Reason for recall:</strong></p>
                 <div class="text-content">
                     {{ product['Reason for recall'] }}
                 </div>
-                <button onclick="toggleText(this)" id="showMoreButton" class="button">Show More</button>
+                <button onclick="toggleText(this)" class="show-more-button">Show More</button>
             </div>
             <p><strong>Base:</strong> {{ product['Base'] }}</p>
             <form id="review-options" method="POST" action="/review">
-                <input type="hidden" name="product_id" value="">
                 <div class="radio-group">
                     <label><input type="radio" name="decision" value="yes" required> Yes</label>
                     <label><input type="radio" name="decision" value="no" required> No</label>
@@ -56,6 +78,16 @@
                 button.innerText = "Show More";
             } else {
                 textContent.classList.add("expanded");
+                button.innerText = "Show Less";
+            }
+        }
+        function toggleProductGroup(button) {
+            var productGroup = document.querySelector(".expandable-product-group");
+            if (productGroup.classList.contains("expanded")) {
+                productGroup.classList.remove("expanded");
+                button.innerText = "Show More";
+            } else {
+                productGroup.classList.add("expanded");
                 button.innerText = "Show Less";
             }
         }

@@ -6,21 +6,76 @@
     <title>Library</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
-      body.review-page {
-        background: url('{{ url_for('static', filename='library.webp') }}') no-repeat center center fixed;
-        background-size: cover;
-      }
-body {
-        cursor: url('{{ url_for('static', filename='p.png') }}'), auto;
-      }
+        body.library-page {
+            background: url('{{ url_for('static', filename='library.webp') }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+        body {
+            cursor: url('{{ url_for('static', filename='p.png') }}'), auto;
+        }
+        .top-buttons {
+            position: fixed;
+            top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+        .top-buttons a {
+            background-color: black;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .download-button-container {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+        .download-button-container a {
+             background-color: black;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .category-row {
+            display: flex;
+            justify-content: center; /* Center the row horizontally */
+            width: 100%;
+            padding: 20px 0;
+            box-sizing: border-box;
+        }
+        .category-item {
+            width: 30%;
+            text-align: left;
+            overflow-y: auto;
+            max-height: calc(100vh - 150px);
+            margin: 0 10px; /* Add some horizontal spacing between items */
+        }
+        .product-list {
+            list-style: none;
+            padding: 0;
+            word-wrap: break-word;
+        }
+        .container-wrapper {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
     </style>
 </head>
-<body class="review-page">
+<body class="library-page">
+    <div class="top-buttons">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('review') }}">Back to Review</a>
+    </div>
     <div class="container-wrapper">
-        <h1>Saved Decisions</h1>
-
-        <div style="display: flex; justify-content: space-around;">
-            <div class="category-column">
+        <div class="category-row">
+            <div class="category-item">
                 <h2>Yes</h2>
                 <ul class="product-list">
                     {% if decided_yes %}
@@ -32,8 +87,7 @@ body {
                     {% endif %}
                 </ul>
             </div>
-
-            <div class="category-column">
+            <div class="category-item">
                 <h2>No</h2>
                 <ul class="product-list">
                     {% if decided_no %}
@@ -45,8 +99,7 @@ body {
                     {% endif %}
                 </ul>
             </div>
-
-            <div class="category-column">
+            <div class="category-item">
                 <h2>Maybe</h2>
                 <ul class="product-list">
                     {% if decided_maybe %}
@@ -59,11 +112,9 @@ body {
                 </ul>
             </div>
         </div>
-
-        <div id="nav-links">
-            <a href="{{ url_for('review') }}" class="nav-link">Go to Review</a>
-            <a href="{{ url_for('index') }}" class="nav-link">Back to Home</a>
-        </div>
+    </div>
+    <div class="download-button-container">
+        <a href="{{ url_for('download_data') }}">Download Data</a>
     </div>
 </body>
 </html>
